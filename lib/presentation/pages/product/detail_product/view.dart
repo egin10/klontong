@@ -6,7 +6,8 @@ import 'provider.dart';
 
 @RoutePage()
 class DetailProductPage extends StatelessWidget {
-  const DetailProductPage({super.key});
+  final String title;
+  const DetailProductPage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,15 @@ class DetailProductPage extends StatelessWidget {
     final provider = context.read<DetailProductProvider>();
     final state = provider.state;
 
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text(title),
+        foregroundColor: Colors.white,
+      ),
+      body: Center(
+        child: Text("Detail $title"),
+      ),
+    );
   }
 }

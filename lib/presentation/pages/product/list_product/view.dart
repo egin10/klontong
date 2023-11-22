@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'provider.dart';
+import 'widget/product_card.dart';
+import 'widget/search_textfield.dart';
 
 @RoutePage()
 class ListProductPage extends StatelessWidget {
@@ -11,7 +13,7 @@ class ListProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => ListProductProvider(),
+      create: (BuildContext context) => ListProductProvider(context),
       builder: (context, child) => _buildPage(context),
     );
   }
@@ -37,11 +39,12 @@ class ListProductPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.note_add_rounded,
-                color: Colors.white,
-              )),
+            onPressed: () {},
+            icon: const Icon(
+              Icons.note_add_rounded,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
       body: Container(
@@ -50,19 +53,27 @@ class ListProductPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Column(
           children: [
+            // Search
+            const SearchTextField(),
+
+            // List Products
             Expanded(
-              child: ListView.builder(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 300,
+                  childAspectRatio: 0.75,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 4,
+                ),
                 itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    margin: const EdgeInsets.symmetric(vertical: 4),
-                    height: 50,
-                    color: Colors.amber,
-                    child: Center(child: Text('Entry $index')),
-                  );
+                itemBuilder: (BuildContext context, index) {
+                  return ProductCard(index: index);
                 },
               ),
             ),
+            const SizedBox(height: 6),
+
+            // Pagination [Preview, Next]
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
