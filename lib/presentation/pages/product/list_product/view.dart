@@ -39,9 +39,9 @@ class ListProductPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () => provider.navigateToFormProduct(),
+            onPressed: () => provider.navigateToCartProduct(),
             icon: const Icon(
-              Icons.note_add_rounded,
+              Icons.shopping_cart_outlined,
               color: Colors.white,
             ),
           ),

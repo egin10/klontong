@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    CartProductRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CartProductPage(),
+      );
+    },
     DetailProductRoute.name: (routeData) {
       final args = routeData.argsAs<DetailProductRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -22,17 +28,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: DetailProductPage(
           key: args.key,
           title: args.title,
-        ),
-      );
-    },
-    FormProductRoute.name: (routeData) {
-      final args = routeData.argsAs<FormProductRouteArgs>(
-          orElse: () => const FormProductRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: FormProductPage(
-          key: args.key,
-          product: args.product,
         ),
       );
     },
@@ -49,6 +44,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [CartProductPage]
+class CartProductRoute extends PageRouteInfo<void> {
+  const CartProductRoute({List<PageRouteInfo>? children})
+      : super(
+          CartProductRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CartProductRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -86,44 +95,6 @@ class DetailProductRouteArgs {
   @override
   String toString() {
     return 'DetailProductRouteArgs{key: $key, title: $title}';
-  }
-}
-
-/// generated route for
-/// [FormProductPage]
-class FormProductRoute extends PageRouteInfo<FormProductRouteArgs> {
-  FormProductRoute({
-    Key? key,
-    Product? product,
-    List<PageRouteInfo>? children,
-  }) : super(
-          FormProductRoute.name,
-          args: FormProductRouteArgs(
-            key: key,
-            product: product,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'FormProductRoute';
-
-  static const PageInfo<FormProductRouteArgs> page =
-      PageInfo<FormProductRouteArgs>(name);
-}
-
-class FormProductRouteArgs {
-  const FormProductRouteArgs({
-    this.key,
-    this.product,
-  });
-
-  final Key? key;
-
-  final Product? product;
-
-  @override
-  String toString() {
-    return 'FormProductRouteArgs{key: $key, product: $product}';
   }
 }
 
