@@ -26,9 +26,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     FormProductRoute.name: (routeData) {
+      final args = routeData.argsAs<FormProductRouteArgs>(
+          orElse: () => const FormProductRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const FormProductPage(),
+        child: FormProductPage(
+          key: args.key,
+          product: args.product,
+        ),
       );
     },
     ListProductRoute.name: (routeData) {
@@ -86,16 +91,40 @@ class DetailProductRouteArgs {
 
 /// generated route for
 /// [FormProductPage]
-class FormProductRoute extends PageRouteInfo<void> {
-  const FormProductRoute({List<PageRouteInfo>? children})
-      : super(
+class FormProductRoute extends PageRouteInfo<FormProductRouteArgs> {
+  FormProductRoute({
+    Key? key,
+    Product? product,
+    List<PageRouteInfo>? children,
+  }) : super(
           FormProductRoute.name,
+          args: FormProductRouteArgs(
+            key: key,
+            product: product,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'FormProductRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<FormProductRouteArgs> page =
+      PageInfo<FormProductRouteArgs>(name);
+}
+
+class FormProductRouteArgs {
+  const FormProductRouteArgs({
+    this.key,
+    this.product,
+  });
+
+  final Key? key;
+
+  final Product? product;
+
+  @override
+  String toString() {
+    return 'FormProductRouteArgs{key: $key, product: $product}';
+  }
 }
 
 /// generated route for

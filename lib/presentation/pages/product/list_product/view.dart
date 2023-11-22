@@ -20,7 +20,7 @@ class ListProductPage extends StatelessWidget {
 
   Widget _buildPage(BuildContext context) {
     final provider = context.read<ListProductProvider>();
-    final state = provider.state;
+    // final state = provider.state;
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +39,7 @@ class ListProductPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => provider.navigateToFormProduct(),
             icon: const Icon(
               Icons.note_add_rounded,
               color: Colors.white,

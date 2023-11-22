@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:klontong/presentation/pages/product/detail_product/view.dart';
-import 'package:klontong/presentation/pages/product/form_product/view.dart';
-import 'package:klontong/presentation/pages/product/list_product/view.dart';
-import 'package:klontong/presentation/pages/splashscreen/view.dart';
+
+import '../../domain/entity/product.dart';
+import '../../presentation/pages/product/detail_product/view.dart';
+import '../../presentation/pages/product/form_product/view.dart';
+import '../../presentation/pages/product/list_product/view.dart';
+import '../../presentation/pages/splashscreen/view.dart';
 
 part 'app_router.gr.dart';
 
