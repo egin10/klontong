@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'provider.dart';
+import 'widget/item_product.dart';
 
 @RoutePage()
 class CartProductPage extends StatelessWidget {
@@ -11,7 +12,7 @@ class CartProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => CartProductProvider(),
+      create: (BuildContext context) => CartProductProvider(context),
       builder: (context, child) => _buildPage(context),
     );
   }
@@ -31,6 +32,37 @@ class CartProductPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
+        ),
+      ),
+      body: SizedBox(
+        height: double.maxFinite,
+        width: double.maxFinite,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () => provider.removeAll(),
+                  child: const Text(
+                    "Remove All",
+                    style: TextStyle(
+                      decoration: TextDecoration.none,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) => ItemProduct(index: index),
+              ),
+            ),
+          ],
         ),
       ),
     );
