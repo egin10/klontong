@@ -15,12 +15,6 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    CartProductRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CartProductPage(),
-      );
-    },
     DetailProductRoute.name: (routeData) {
       final args = routeData.argsAs<DetailProductRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -29,6 +23,12 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           title: args.title,
         ),
+      );
+    },
+    FormProductRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FormProductPage(),
       );
     },
     ListProductRoute.name: (routeData) {
@@ -44,20 +44,6 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
-}
-
-/// generated route for
-/// [CartProductPage]
-class CartProductRoute extends PageRouteInfo<void> {
-  const CartProductRoute({List<PageRouteInfo>? children})
-      : super(
-          CartProductRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CartProductRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -96,6 +82,20 @@ class DetailProductRouteArgs {
   String toString() {
     return 'DetailProductRouteArgs{key: $key, title: $title}';
   }
+}
+
+/// generated route for
+/// [FormProductPage]
+class FormProductRoute extends PageRouteInfo<void> {
+  const FormProductRoute({List<PageRouteInfo>? children})
+      : super(
+          FormProductRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FormProductRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

@@ -23,9 +23,21 @@ class ListProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void next() {
+    if (state.currentPage < state.listProducts.length) {
+      debugPrint("Next");
+      state.currentPage++;
+      notifyListeners();
+    }
+  }
+
+  void preview() {
+    debugPrint("Preview");
+  }
+
   void navigateToDetail(String title) =>
       _context.router.navigate(DetailProductRoute(title: title));
 
-  void navigateToCartProduct() =>
-      _context.router.navigate(const CartProductRoute());
+  void navigateToFormProduct() =>
+      _context.router.navigate(const FormProductRoute());
 }

@@ -39,7 +39,7 @@ class ListProductPage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () => provider.navigateToCartProduct(),
+            onPressed: () => provider.navigateToFormProduct(),
             icon: const Icon(
               Icons.shopping_cart_outlined,
               color: Colors.white,
@@ -78,7 +78,7 @@ class ListProductPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => provider.preview(),
                   icon: const Icon(
                     Icons.arrow_circle_left_outlined,
                     size: 36,
@@ -86,7 +86,7 @@ class ListProductPage extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => provider.next(),
                   icon: const Icon(
                     Icons.arrow_circle_right_outlined,
                     size: 36,
