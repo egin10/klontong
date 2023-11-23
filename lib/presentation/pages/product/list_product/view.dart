@@ -50,7 +50,7 @@ class ListProductPage extends StatelessWidget {
       body: Container(
         height: double.maxFinite,
         width: double.maxFinite,
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             // Search
