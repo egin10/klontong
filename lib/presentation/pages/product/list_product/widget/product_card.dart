@@ -1,20 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:klontong/presentation/utils/currency_format.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../domain/entity/product.dart';
 import '../provider.dart';
 
 class ProductCard extends StatelessWidget {
-  final int index;
-  const ProductCard({super.key, required this.index});
+  final Product product;
+
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context
-          .read<ListProductProvider>()
-          .navigateToDetail("Product $index"),
+      onTap: () =>
+          context.read<ListProductProvider>().navigateToDetail(product),
       child: Container(
         height: 120.h,
         margin: EdgeInsets.symmetric(vertical: 4.h),
@@ -34,9 +36,7 @@ class ProductCard extends StatelessWidget {
               child: CachedNetworkImage(
                 height: double.maxFinite,
                 width: double.maxFinite,
-                imageUrl: index % 2 == 0
-                    ? "https://cf.shopee.co.id/file/7cb930d1bd183a435f4fb3e5cc4a896b"
-                    : "https://fksfs.co.id/wps/wp-content/uploads/2019/04/TaroNet_Seaweed-36g_Website.png",
+                imageUrl: product.image ?? '',
                 placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(
                     color: Colors.redAccent,
@@ -59,26 +59,26 @@ class ProductCard extends StatelessWidget {
                     children: [
                       // Product Name
                       Text(
-                        "Product $index",
+                        product.name ?? 'Unknown',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16.sp,
                         ),
                       ),
                       // Product Category
-                      const Text("Cemilan"),
+                      Text(product.categoryName ?? '-'),
                       // Product Weight
-                      const Text("50g"),
+                      Text('${product.weight ?? 0} g'),
                     ],
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       // Product Price
                       Text(
-                        "60.000 IDR",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                        CurrencyFormat.convertToIdr(product.price ?? 0, 0),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],

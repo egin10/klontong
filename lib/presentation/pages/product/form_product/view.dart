@@ -16,7 +16,7 @@ class FormProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => FormProductProvider(),
+      create: (BuildContext context) => FormProductProvider(product),
       builder: (context, child) => _buildPage(context),
     );
   }
@@ -54,6 +54,10 @@ class FormProductPage extends StatelessWidget {
                   FormTextField(
                     hintText: "Image (Url)",
                     controller: state.imageController,
+                    height: 100,
+                    textInputType: TextInputType.multiline,
+                    minLines: 10,
+                    maxLines: 10,
                   ),
                   FormTextField(
                     hintText: "SKU",

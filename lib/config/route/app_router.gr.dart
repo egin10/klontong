@@ -21,7 +21,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: DetailProductPage(
           key: args.key,
-          title: args.title,
+          product: args.product,
         ),
       );
     },
@@ -56,13 +56,13 @@ abstract class _$AppRouter extends RootStackRouter {
 class DetailProductRoute extends PageRouteInfo<DetailProductRouteArgs> {
   DetailProductRoute({
     Key? key,
-    required String title,
+    required Product product,
     List<PageRouteInfo>? children,
   }) : super(
           DetailProductRoute.name,
           args: DetailProductRouteArgs(
             key: key,
-            title: title,
+            product: product,
           ),
           initialChildren: children,
         );
@@ -76,16 +76,16 @@ class DetailProductRoute extends PageRouteInfo<DetailProductRouteArgs> {
 class DetailProductRouteArgs {
   const DetailProductRouteArgs({
     this.key,
-    required this.title,
+    required this.product,
   });
 
   final Key? key;
 
-  final String title;
+  final Product product;
 
   @override
   String toString() {
-    return 'DetailProductRouteArgs{key: $key, title: $title}';
+    return 'DetailProductRouteArgs{key: $key, product: $product}';
   }
 }
 

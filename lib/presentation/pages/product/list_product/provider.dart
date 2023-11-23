@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:klontong/domain/entity/product.dart';
 
 import '../../../../config/route/app_router.dart';
 import '../../../../data/repository/product_repository_impl.dart';
@@ -35,8 +36,8 @@ class ListProductProvider extends ChangeNotifier {
     debugPrint("Preview");
   }
 
-  void navigateToDetail(String title) =>
-      _context.router.navigate(DetailProductRoute(title: title));
+  void navigateToDetail(Product product) =>
+      _context.router.navigate(DetailProductRoute(product: product));
 
   void navigateToFormProduct() => _context.router.navigate(FormProductRoute());
 }

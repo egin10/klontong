@@ -1,6 +1,5 @@
-class DetailProductState {
+import 'package:klontong/domain/entity/product.dart';
 
-  DetailProductState() {
-    // init some variables
-  }
+class DetailProductState {
+  late Product product;
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../domain/entity/product.dart';
 import 'provider.dart';
 import 'widget/product_card.dart';
 import 'widget/search_textfield.dart';
@@ -62,7 +63,24 @@ class ListProductPage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (BuildContext context, index) {
-                  return ProductCard(index: index);
+                  return ProductCard(
+                    product: Product(
+                      name: "Product ${index + 1}",
+                      categoryName: "Cemilan",
+                      weight: 20,
+                      height: 10,
+                      length: 10,
+                      width: 10,
+                      price: 20000,
+                      description:
+                          "Product ${index + 1} very nice and delicious.",
+                      id: index,
+                      sku: "AKSDJ",
+                      image: index % 2 == 0
+                          ? "https://cf.shopee.co.id/file/7cb930d1bd183a435f4fb3e5cc4a896b"
+                          : "https://fksfs.co.id/wps/wp-content/uploads/2019/04/TaroNet_Seaweed-36g_Website.png",
+                    ),
+                  );
                 },
               ),
             ),
