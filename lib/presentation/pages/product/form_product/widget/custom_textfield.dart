@@ -6,8 +6,8 @@ class FormTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool readOnly;
   final TextInputType? textInputType;
-  final int? minLines;
-  final int? maxLines;
+  final int minLines;
+  final int maxLines;
   final double height;
 
   const FormTextField({
@@ -16,8 +16,8 @@ class FormTextField extends StatelessWidget {
     this.controller,
     this.readOnly = false,
     this.textInputType,
-    this.minLines,
-    this.maxLines,
+    this.minLines = 1,
+    this.maxLines = 1,
     this.height = 50,
   });
 

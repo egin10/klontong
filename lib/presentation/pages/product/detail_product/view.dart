@@ -160,8 +160,15 @@ class DetailProductPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 26.h),
+                Container(
+                  padding: EdgeInsets.only(bottom: 26.h, top: 10.h),
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(

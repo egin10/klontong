@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({super.key});
+  final TextEditingController? controller;
+
+  const SearchTextField({super.key, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class SearchTextField extends StatelessWidget {
           SizedBox(width: 8.w),
           Expanded(
             child: TextField(
+              controller: controller,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Search",

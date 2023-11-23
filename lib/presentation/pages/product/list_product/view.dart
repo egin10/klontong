@@ -22,7 +22,7 @@ class ListProductPage extends StatelessWidget {
 
   Widget _buildPage(BuildContext context) {
     final provider = context.read<ListProductProvider>();
-    // final state = provider.state;
+    final state = provider.state;
 
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +56,9 @@ class ListProductPage extends StatelessWidget {
         child: Column(
           children: [
             // Search
-            const SearchTextField(),
+            SearchTextField(
+              controller: state.searchController,
+            ),
 
             // List Products
             Expanded(
