@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:klontong/config/route/app_router.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'config/route/app_router.dart';
 
 class KlontongApp extends StatelessWidget {
   KlontongApp({super.key});
@@ -8,14 +10,22 @@ class KlontongApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Klontong App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
-        useMaterial3: true,
+    return ScreenUtilInit(
+      designSize: const Size(375, 820),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Klontong App',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+            useMaterial3: true,
+          ),
+          routerConfig: _appRouter.config(),
+        ),
       ),
-      routerConfig: _appRouter.config(),
     );
   }
 }

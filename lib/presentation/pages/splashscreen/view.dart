@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'provider.dart';
@@ -24,19 +25,19 @@ class SplashscreenPage extends StatelessWidget {
         width: double.maxFinite,
         height: double.maxFinite,
         color: Colors.red,
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.store,
-              size: 120,
+              size: 120.h,
               color: Colors.white,
             ),
             Text(
               "KLONTONG",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 24,
+                fontSize: 24.sp,
                 color: Colors.white,
               ),
             ),

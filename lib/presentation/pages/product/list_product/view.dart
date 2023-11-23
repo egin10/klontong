@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'provider.dart';
@@ -25,12 +26,12 @@ class ListProductPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: const Text(
+        title: Text(
           "KLONTONG",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 20.sp,
           ),
         ),
         leading: const Icon(
@@ -50,7 +51,7 @@ class ListProductPage extends StatelessWidget {
       body: Container(
         height: double.maxFinite,
         width: double.maxFinite,
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
         child: Column(
           children: [
             // Search
@@ -65,7 +66,7 @@ class ListProductPage extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: 4.w),
 
             // Pagination [Preview, Next]
             Row(
@@ -73,23 +74,23 @@ class ListProductPage extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () => provider.preview(),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_circle_left_outlined,
-                    size: 36,
+                    size: 36.h,
                     color: Colors.grey,
                   ),
                 ),
                 IconButton(
                   onPressed: () => provider.next(),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_circle_right_outlined,
-                    size: 36,
+                    size: 36.h,
                     color: Colors.red,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

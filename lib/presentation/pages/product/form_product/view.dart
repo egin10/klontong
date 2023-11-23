@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:klontong/domain/entity/product.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../domain/entity/product.dart';
+import '../../../widget/custom_textfield.dart';
 import 'provider.dart';
 
 @RoutePage()
@@ -30,8 +32,13 @@ class FormProductPage extends StatelessWidget {
             Text(product != null ? "Edit ${product!.name}" : "Insert Product"),
         foregroundColor: Colors.white,
       ),
-      body: Center(
-        child: Text("Insert new Product"),
+      body: Padding(
+        padding: EdgeInsets.all(16.h),
+        child: ListView(
+          children: [
+            CustomTextField(hintText: "Name"),
+          ],
+        ),
       ),
     );
   }

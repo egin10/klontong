@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchTextField extends StatelessWidget {
   const SearchTextField({super.key});
@@ -6,26 +7,26 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 42,
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      height: 42.h,
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.redAccent),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.r),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Icon(
+          const Icon(
             Icons.search,
             color: Colors.red,
           ),
-          SizedBox(width: 8),
+          SizedBox(width: 8.w),
           Expanded(
             child: TextField(
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Search",
-                contentPadding: EdgeInsets.symmetric(vertical: 11)
+                contentPadding: EdgeInsets.symmetric(vertical: 11.h),
               ),
             ),
           ),

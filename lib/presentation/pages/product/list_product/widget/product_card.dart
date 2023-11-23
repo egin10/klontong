@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../provider.dart';
@@ -15,12 +16,13 @@ class ProductCard extends StatelessWidget {
           .read<ListProductProvider>()
           .navigateToDetail("Product $index"),
       child: Container(
-        height: 120,
-        margin: const EdgeInsets.symmetric(vertical: 4),
-        padding: const EdgeInsets.all(8),
+        height: 120.h,
+        margin: EdgeInsets.symmetric(vertical: 4.h),
+        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.h),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.r),
+          color: Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +30,7 @@ class ProductCard extends StatelessWidget {
             // Product Image
             SizedBox(
               height: double.maxFinite,
-              width: 100,
+              width: 100.h,
               child: CachedNetworkImage(
                 height: double.maxFinite,
                 width: double.maxFinite,
@@ -46,7 +48,7 @@ class ProductCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(width: 16),
+            SizedBox(width: 16.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,9 +60,9 @@ class ProductCard extends StatelessWidget {
                       // Product Name
                       Text(
                         "Product $index",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                         ),
                       ),
                       // Product Category
