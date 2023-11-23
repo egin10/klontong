@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../domain/entity/product.dart';
-import 'widget/custom_textfield.dart';
+import '../../../widget/loading.dart';
 import 'provider.dart';
+import 'widget/custom_textfield.dart';
 
 @RoutePage()
 class FormProductPage extends StatelessWidget {
@@ -16,13 +17,13 @@ class FormProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => FormProductProvider(product),
+      create: (BuildContext context) => FormProductProvider(context, product),
       builder: (context, child) => _buildPage(context),
     );
   }
 
   Widget _buildPage(BuildContext context) {
-    final provider = context.read<FormProductProvider>();
+    final provider = context.watch<FormProductProvider>();
     final state = provider.state;
 
     return Scaffold(
@@ -32,110 +33,117 @@ class FormProductPage extends StatelessWidget {
             Text(product != null ? "Edit ${product!.name}" : "Insert Product"),
         foregroundColor: Colors.white,
       ),
-      body: Container(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        padding: EdgeInsets.all(16.h),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView(
-                // physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  FormTextField(
-                    hintText: "Name",
-                    controller: state.nameController,
-                  ),
-                  FormTextField(
-                    hintText: "Category",
-                    readOnly: true,
-                    controller: state.categoryController,
-                  ),
-                  FormTextField(
-                    hintText: "Image (Url)",
-                    controller: state.imageController,
-                    height: 100,
-                    textInputType: TextInputType.multiline,
-                    minLines: 10,
-                    maxLines: 10,
-                  ),
-                  FormTextField(
-                    hintText: "SKU",
-                    controller: state.skuController,
-                  ),
-                  SizedBox(
-                    width: double.maxFinite,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: FormTextField(
-                            hintText: "Width",
-                            controller: state.widthController,
-                          ),
-                        ),
-                        SizedBox(width: 10.w),
-                        Expanded(
-                          child: FormTextField(
-                            hintText: "Height",
-                            controller: state.heightController,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
+      body: Stack(
+        children: [
+          Container(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            padding: EdgeInsets.all(16.h),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    // physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      Expanded(
-                        child: FormTextField(
-                          hintText: "Length",
-                          controller: state.lengthController,
+                      FormTextField(
+                        hintText: "Name",
+                        controller: state.nameController,
+                      ),
+                      FormTextField(
+                        hintText: "Category",
+                        readOnly: true,
+                        controller: state.categoryController,
+                      ),
+                      FormTextField(
+                        hintText: "Image (Url)",
+                        controller: state.imageController,
+                        height: 100,
+                        textInputType: TextInputType.multiline,
+                        minLines: 10,
+                        maxLines: 10,
+                      ),
+                      FormTextField(
+                        hintText: "SKU",
+                        controller: state.skuController,
+                      ),
+                      SizedBox(
+                        width: double.maxFinite,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: FormTextField(
+                                hintText: "Width",
+                                controller: state.widthController,
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            Expanded(
+                              child: FormTextField(
+                                hintText: "Height",
+                                controller: state.heightController,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      SizedBox(width: 10.w),
-                      Expanded(
-                        child: FormTextField(
-                          hintText: "Weight",
-                          controller: state.weightController,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: FormTextField(
+                              hintText: "Length",
+                              controller: state.lengthController,
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          Expanded(
+                            child: FormTextField(
+                              hintText: "Weight",
+                              controller: state.weightController,
+                            ),
+                          ),
+                        ],
+                      ),
+                      FormTextField(
+                        hintText: "Price",
+                        controller: state.priceController,
+                      ),
+                      FormTextField(
+                        hintText: "Description",
+                        height: 160,
+                        textInputType: TextInputType.multiline,
+                        minLines: 10,
+                        maxLines: 10,
+                        controller: state.descriptionController,
                       ),
                     ],
                   ),
-                  FormTextField(
-                    hintText: "Price",
-                    controller: state.priceController,
-                  ),
-                  FormTextField(
-                    hintText: "Description",
-                    height: 160,
-                    textInputType: TextInputType.multiline,
-                    minLines: 10,
-                    maxLines: 10,
-                    controller: state.descriptionController,
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 16.h),
-              width: double.maxFinite,
-              height: 45.h,
-              child: ElevatedButton(
-                onPressed: () => provider.submit(product != null),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
                 ),
-                child: Text(
-                  product != null ? "UPDATE" : "INSERT",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.sp,
-                    color: Colors.white,
+                Container(
+                  margin: EdgeInsets.only(bottom: 16.h),
+                  width: double.maxFinite,
+                  height: 45.h,
+                  child: ElevatedButton(
+                    onPressed: () => provider.submit(product != null),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.redAccent,
+                    ),
+                    child: Text(
+                      product != null ? "UPDATE" : "INSERT",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16.sp,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+
+          // When loading/busy
+          state.isBusy ? const Loading() : Container(),
+        ],
       ),
     );
   }

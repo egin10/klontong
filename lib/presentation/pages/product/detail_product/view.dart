@@ -1,9 +1,14 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:klontong/domain/entity/product.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../domain/entity/product.dart';
+import '../../../utils/currency_format.dart';
+import '../../../widget/loading.dart';
 import 'provider.dart';
+import 'widget/dimentions_item.dart';
 
 @RoutePage()
 class DetailProductPage extends StatelessWidget {
@@ -19,13 +24,13 @@ class DetailProductPage extends StatelessWidget {
   }
 
   Widget _buildPage(BuildContext context) {
-    final provider = context.read<DetailProductProvider>();
+    final provider = context.watch<DetailProductProvider>();
     final state = provider.state;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text(state.product.name ?? 'Unknown'),
+        // title: Text(state.product.name ?? 'Unknown'),
         foregroundColor: Colors.white,
         actions: [
           PopupMenuButton<String>(
@@ -35,7 +40,7 @@ class DetailProductPage extends StatelessWidget {
                 child: const Text('Edit'),
               ),
               PopupMenuItem(
-                onTap: () {},
+                onTap: () => provider.delete(context),
                 child: const Text('Delete'),
               ),
             ],
@@ -44,8 +49,137 @@ class DetailProductPage extends StatelessWidget {
           )
         ],
       ),
-      body: Center(
-        child: Text("Detail ${state.product.name}"),
+      body: Stack(
+        children: [
+          Container(
+            height: double.maxFinite,
+            width: double.maxFinite,
+            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Category Name
+                    Text(
+                      product.categoryName != null
+                          ? product.categoryName!.toUpperCase()
+                          : '-',
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+
+                    // Product Name
+                    Text(
+                      product.name ?? 'Unknown',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Image
+                        Container(
+                          height: 200.h,
+                          width: 200.h,
+                          margin: EdgeInsets.only(right: 16.w),
+                          child: CachedNetworkImage(
+                            imageUrl: product.image ?? '',
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.redAccent,
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => const Center(
+                              child: Icon(Icons.error),
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        // Dimentions
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Dimensions",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(height: 6.h),
+                              DimentionsItem(
+                                title: "Width",
+                                value: '${product.width ?? 0} cm',
+                              ),
+                              DimentionsItem(
+                                title: "Length",
+                                value: '${product.length ?? 0} cm',
+                              ),
+                              DimentionsItem(
+                                title: "Height",
+                                value: '${product.height ?? 0} cm',
+                              ),
+                              DimentionsItem(
+                                title: "Weight",
+                                value: '${product.weight ?? 0} g',
+                              ),
+                              DimentionsItem(
+                                title: "SKU",
+                                value: product.sku ?? '',
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 16.h),
+                  ],
+                ),
+                Text(
+                  'Description',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.sp,
+                  ),
+                ),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Text(product.description ?? 'No Description.'),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 26.h),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      "Price : ${CurrencyFormat.convertToIdr(product.price ?? 0, 0)}",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // When loading/busy
+          state.isBusy ? const Loading() : Container(),
+        ],
       ),
     );
   }

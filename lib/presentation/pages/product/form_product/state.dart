@@ -12,7 +12,9 @@ class FormProductState {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
+  late bool isBusy;
+
   FormProductState() {
-    // init some variables
+    isBusy = false;
   }
 }
