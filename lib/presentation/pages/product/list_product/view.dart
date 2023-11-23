@@ -41,7 +41,7 @@ class ListProductPage extends StatelessWidget {
           IconButton(
             onPressed: () => provider.navigateToFormProduct(),
             icon: const Icon(
-              Icons.shopping_cart_outlined,
+              Icons.note_add_rounded,
               color: Colors.white,
             ),
           ),
@@ -58,13 +58,7 @@ class ListProductPage extends StatelessWidget {
 
             // List Products
             Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 300,
-                  childAspectRatio: 0.75,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 4,
-                ),
+              child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (BuildContext context, index) {
                   return ProductCard(index: index);

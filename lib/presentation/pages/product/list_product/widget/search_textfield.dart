@@ -25,7 +25,7 @@ class SearchTextField extends StatelessWidget {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Search",
-                contentPadding: EdgeInsets.symmetric(vertical: 10)
+                contentPadding: EdgeInsets.symmetric(vertical: 11)
               ),
             ),
           ),

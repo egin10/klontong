@@ -38,6 +38,5 @@ class ListProductProvider extends ChangeNotifier {
   void navigateToDetail(String title) =>
       _context.router.navigate(DetailProductRoute(title: title));
 
-  void navigateToFormProduct() =>
-      _context.router.navigate(const FormProductRoute());
+  void navigateToFormProduct() => _context.router.navigate(FormProductRoute());
 }

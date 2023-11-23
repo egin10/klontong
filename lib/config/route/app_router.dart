@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../domain/entity/product.dart';
 import '../../presentation/pages/product/detail_product/view.dart';
 import '../../presentation/pages/product/form_product/view.dart';
 import '../../presentation/pages/product/list_product/view.dart';
