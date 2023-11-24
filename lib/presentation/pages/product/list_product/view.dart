@@ -1,11 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:klontong/presentation/widget/empty.dart';
-import 'package:klontong/presentation/widget/loading.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../domain/entity/product.dart';
+import '../../../widget/empty.dart';
+import '../../../widget/loading.dart';
 import 'provider.dart';
 import 'widget/product_card.dart';
 import 'widget/search_textfield.dart';

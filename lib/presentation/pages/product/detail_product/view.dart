@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +7,7 @@ import '../../../../domain/entity/product.dart';
 import '../../../utils/currency_format.dart';
 import '../../../widget/loading.dart';
 import 'provider.dart';
-import 'widget/dimentions_item.dart';
+import 'widget/product_image_and_dimentions.dart';
 
 @RoutePage()
 class DetailProductPage extends StatelessWidget {
@@ -59,92 +58,37 @@ class DetailProductPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Category Name
-                    Text(
-                      product.categoryName != null
-                          ? product.categoryName!.toUpperCase()
-                          : '-',
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                        fontSize: 14.sp,
-                      ),
-                    ),
-
-                    // Product Name
-                    Text(
-                      product.name ?? 'Unknown',
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 8.h),
-
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Image
-                        Container(
-                          height: 200.h,
-                          width: 200.h,
-                          margin: EdgeInsets.only(right: 16.w),
-                          child: CachedNetworkImage(
-                            imageUrl: product.image ?? '',
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(
-                                color: Colors.redAccent,
-                              ),
-                            ),
-                            errorWidget: (context, url, error) => const Center(
-                              child: Icon(Icons.error),
-                            ),
-                            fit: BoxFit.cover,
-                          ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Category Name
+                      Text(
+                        product.categoryName != null
+                            ? product.categoryName!.toUpperCase()
+                            : '-',
+                        style: TextStyle(
+                          color: Colors.redAccent,
+                          fontSize: 14.sp,
                         ),
-                        // Dimentions
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Dimensions",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 6.h),
-                              DimentionsItem(
-                                title: "Width",
-                                value: '${product.width ?? 0} cm',
-                              ),
-                              DimentionsItem(
-                                title: "Length",
-                                value: '${product.length ?? 0} cm',
-                              ),
-                              DimentionsItem(
-                                title: "Height",
-                                value: '${product.height ?? 0} cm',
-                              ),
-                              DimentionsItem(
-                                title: "Weight",
-                                value: '${product.weight ?? 0} g',
-                              ),
-                              DimentionsItem(
-                                title: "SKU",
-                                value: product.sku ?? '',
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 16.h),
-                  ],
+                      ),
+
+                      // Product Name
+                      Text(
+                        product.name ?? 'Unknown',
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8.h),
+
+                      // Product Image & Dimensions
+                      ProductImageAndDimentions(product: product),
+                    ],
+                  ),
                 ),
                 Text(
                   'Description',

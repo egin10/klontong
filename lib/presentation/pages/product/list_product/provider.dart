@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:klontong/domain/entity/product.dart';
 
 import '../../../../config/route/app_router.dart';
 import '../../../../data/repository/product_repository_impl.dart';
 import '../../../../data/source/network/product_api.dart';
+import '../../../../domain/entity/product.dart';
 import 'state.dart';
 
 class ListProductProvider extends ChangeNotifier {
