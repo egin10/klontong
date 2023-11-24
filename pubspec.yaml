@@ -18,7 +18,7 @@ dependencies:
   #Utilities
   auto_route: ^7.8.4
   equatable: ^2.0.5
-  dio: ^5.3.4
+  dio: ^4.0.4
   intl: ^0.18.1
   flutter_dotenv: ^5.1.0
 

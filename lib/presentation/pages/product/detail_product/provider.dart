@@ -60,6 +60,8 @@ class DetailProductProvider extends ChangeNotifier {
     });
   }
 
+  void navigateBack() => _context.router.pop<bool>(true);
+
   void navigateToFormProduct() =>
       _context.router.navigate(FormProductRoute(product: state.product));
 }

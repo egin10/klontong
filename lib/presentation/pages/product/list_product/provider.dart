@@ -46,15 +46,22 @@ class ListProductProvider extends ChangeNotifier {
     debugPrint("Preview");
   }
 
-  void navigateToDetail(Product product) {
+  void navigateToDetail(Product product) async {
     state.searchController.text = '';
 
-    _context.router.navigate(DetailProductRoute(product: product));
+    final detail =
+        await _context.router.push(DetailProductRoute(product: product));
+    if (detail != null && detail as bool) {
+      getListProduct();
+    }
   }
 
-  void navigateToFormProduct() {
+  void navigateToFormProduct() async {
     state.searchController.text = '';
 
-    _context.router.navigate(FormProductRoute());
+    final created = await _context.router.push(FormProductRoute());
+    if (created != null && created as bool) {
+      getListProduct();
+    }
   }
 }

@@ -51,7 +51,7 @@ class FormProductPage extends StatelessWidget {
                       ),
                       FormTextField(
                         hintText: "Category",
-                        readOnly: true,
+                        // readOnly: true,
                         controller: state.categoryController,
                       ),
                       FormTextField(

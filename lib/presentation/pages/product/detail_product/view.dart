@@ -29,8 +29,13 @@ class DetailProductPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        // title: Text(state.product.name ?? 'Unknown'),
         foregroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () => provider.navigateBack(),
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+          ),
+        ),
         actions: [
           PopupMenuButton<String>(
             itemBuilder: (BuildContext context) => [

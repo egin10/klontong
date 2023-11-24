@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:klontong/domain/entity/product.dart';
+import '../../domain/entity/product.dart';
 
 class ProductDto extends Product {
   const ProductDto({

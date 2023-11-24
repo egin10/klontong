@@ -59,6 +59,10 @@ class FormProductProvider extends ChangeNotifier {
 
     // INSERT NEW PRODUCT
     final createdProduct = await productRepo.createProduct(product);
-    _context.router.pop();
+    print(createdProduct);
+    
+    state.isBusy = false;
+    notifyListeners();
+    // _context.router.pop<bool>(true);
   }
 }

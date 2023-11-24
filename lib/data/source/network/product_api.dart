@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:klontong/domain/entity/product.dart';
 
+import '../../../domain/entity/product.dart';
 import '../../dto/product_dto.dart';
 import '../../endpoint/endpoint_product.dart';
 import '../../service/dio_service.dart';
@@ -34,7 +34,7 @@ class ProductApiImpl implements ProductApi {
           (product) => ProductDto.fromMap(product),
         ),
       );
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       catchError(e, []);
     }
 
@@ -46,19 +46,24 @@ class ProductApiImpl implements ProductApi {
     try {
       final Map<String, dynamic> headers = {
         'accept': 'application/json',
+        'content-type': 'application/json',
       };
 
+      // Issue
       final response = await _dio.post(
         EndpointProduct.products,
         options: Options(headers: headers),
         data: ProductDto.fromProduct(product).toMap(),
       );
 
+      print(response);
+
       if (response.statusCode != 200) {
         throw Exception("Error occurred");
       }
+
       return ProductDto.fromMap(response.data);
-    } on DioException catch (e) {
+    } on DioError catch (e) {
       catchError(e, const ProductDto());
     }
 
