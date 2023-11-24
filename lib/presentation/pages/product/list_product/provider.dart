@@ -17,6 +17,8 @@ class ListProductProvider extends ChangeNotifier {
     final productApi = ProductApiImpl();
     productRepo = ProductRepositoryImpl(api: productApi);
     _context = context;
+
+    getListProduct();
   }
 
   void getListProduct() async {
