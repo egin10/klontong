@@ -21,8 +21,16 @@ class ListProductProvider extends ChangeNotifier {
     getListProduct();
   }
 
+  List<Product> loadProducts() {
+    return state.listProducts;
+  }
+
   void getListProduct() async {
+    state.isBusy = true;
+    notifyListeners();
+
     state.listProducts = await productRepo.getListProduct();
+    state.isBusy = false;
     notifyListeners();
   }
 

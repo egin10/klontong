@@ -123,7 +123,8 @@ class FormProductPage extends StatelessWidget {
                   width: double.maxFinite,
                   height: 45.h,
                   child: ElevatedButton(
-                    onPressed: () => provider.submit(product != null),
+                    onPressed: () =>
+                        provider.submit(product != null, product?.id),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.redAccent,
                     ),

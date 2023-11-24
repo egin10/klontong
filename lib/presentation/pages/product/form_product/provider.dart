@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:klontong/domain/entity/product.dart';
 
+import '../../../../data/repository/product_repository_impl.dart';
+import '../../../../data/source/network/product_api.dart';
+import '../../../../domain/entity/product.dart';
 import 'state.dart';
 
 class FormProductProvider extends ChangeNotifier {
   final state = FormProductState();
+
+  late ProductRepositoryImpl productRepo;
   late BuildContext _context;
 
   FormProductProvider(BuildContext context, Product? product) {
@@ -22,22 +26,39 @@ class FormProductProvider extends ChangeNotifier {
       state.descriptionController.text = '${product.description ?? 0}';
     }
 
+    final productApi = ProductApiImpl();
+    productRepo = ProductRepositoryImpl(api: productApi);
     _context = context;
   }
 
-  void submit(bool isUpdate) {
+  void submit(bool isUpdate, String? id) async {
     state.isBusy = true;
     notifyListeners();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      if (isUpdate) {
-        debugPrint("UPDATED");
-        _context.router.pop();
-        return;
-      }
+    // Set New Product
+    final product = Product(
+      id: id,
+      name: state.nameController.text,
+      categoryId: 1,
+      categoryName: state.categoryController.text,
+      image: state.imageController.text,
+      sku: state.skuController.text,
+      width: double.tryParse(state.widthController.text),
+      height: double.tryParse(state.heightController.text),
+      length: double.tryParse(state.lengthController.text),
+      weight: double.tryParse(state.weightController.text),
+      price: double.tryParse(state.priceController.text),
+      description: state.descriptionController.text,
+    );
 
-      debugPrint("INSERT");
+    if (isUpdate) {
+      debugPrint("UPDATED");
       _context.router.pop();
-    });
+      return;
+    }
+
+    // INSERT NEW PRODUCT
+    final createdProduct = await productRepo.createProduct(product);
+    _context.router.pop();
   }
 }

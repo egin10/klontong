@@ -12,4 +12,10 @@ class ProductRepositoryImpl implements ProductRepository {
     final listProducts = await _api.getListProducts();
     return listProducts;
   }
+  
+  @override
+  Future<Product> createProduct(Product product) async {
+    final created = await _api.createProduct(product);
+    return created.toProduct();
+  }
 }

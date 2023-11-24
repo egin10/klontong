@@ -16,7 +16,7 @@ class Product extends Equatable {
     this.price,
   });
 
-  final int? id;
+  final String? id;
   final int? categoryId;
   final String? categoryName;
   final String? sku;

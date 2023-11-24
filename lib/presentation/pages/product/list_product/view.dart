@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:klontong/presentation/widget/empty.dart';
+import 'package:klontong/presentation/widget/loading.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../domain/entity/product.dart';
@@ -21,7 +23,7 @@ class ListProductPage extends StatelessWidget {
   }
 
   Widget _buildPage(BuildContext context) {
-    final provider = context.read<ListProductProvider>();
+    final provider = context.watch<ListProductProvider>();
     final state = provider.state;
 
     return Scaffold(
@@ -61,55 +63,46 @@ class ListProductPage extends StatelessWidget {
             ),
 
             // List Products
-            Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (BuildContext context, index) {
-                  return ProductCard(
-                    product: Product(
-                      name: "Product ${index + 1}",
-                      categoryName: "Cemilan",
-                      weight: 20,
-                      height: 10,
-                      length: 10,
-                      width: 10,
-                      price: 20000,
-                      description:
-                          "Product ${index + 1} very nice and delicious. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                      id: index,
-                      sku: "AKSDJ",
-                      image: index % 2 == 0
-                          ? "https://cf.shopee.co.id/file/7cb930d1bd183a435f4fb3e5cc4a896b"
-                          : "https://fksfs.co.id/wps/wp-content/uploads/2019/04/TaroNet_Seaweed-36g_Website.png",
-                    ),
-                  );
-                },
+            if (state.isBusy) ...[
+              const Expanded(
+                child: Loading(
+                  backgroundColor: Colors.white,
+                ),
               ),
-            ),
-            SizedBox(height: 4.w),
+            ] else if (state.listProducts.isNotEmpty) ...[
+              Expanded(
+                child: ListView.builder(
+                  itemCount: state.listProducts.length,
+                  itemBuilder: (BuildContext context, index) =>
+                      ProductCard(product: state.listProducts[index]),
+                ),
+              ),
+              SizedBox(height: 4.w),
 
-            // Pagination [Preview, Next]
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: () => provider.preview(),
-                  icon: Icon(
-                    Icons.arrow_circle_left_outlined,
-                    size: 36.h,
-                    color: Colors.grey,
+              // Pagination [Preview, Next]
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: () => provider.preview(),
+                    icon: Icon(
+                      Icons.arrow_circle_left_outlined,
+                      size: 36.h,
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () => provider.next(),
-                  icon: Icon(
-                    Icons.arrow_circle_right_outlined,
-                    size: 36.h,
-                    color: Colors.red,
+                  IconButton(
+                    onPressed: () => provider.next(),
+                    icon: Icon(
+                      Icons.arrow_circle_right_outlined,
+                      size: 36.h,
+                      color: Colors.red,
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+            ] else
+              const Expanded(child: EmptyData()),
             SizedBox(height: 20.h),
           ],
         ),

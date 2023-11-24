@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Loading extends StatelessWidget {
-  const Loading({super.key});
+  final Color? backgroundColor;
+
+  const Loading({super.key, this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
-      color: Colors.black.withOpacity(0.6),
+      color: backgroundColor ?? Colors.black.withOpacity(0.6),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

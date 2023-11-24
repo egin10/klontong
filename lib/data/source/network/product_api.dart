@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:klontong/domain/entity/product.dart';
 
 import '../../dto/product_dto.dart';
 import '../../endpoint/endpoint_product.dart';
@@ -8,7 +8,7 @@ import '../../service/dio_service.dart';
 
 abstract class ProductApi {
   Future<List<ProductDto>> getListProducts();
-  Future<ProductDto> getDetailProduct(String productID);
+  Future<ProductDto> createProduct(Product product);
 }
 
 class ProductApiImpl implements ProductApi {
@@ -17,7 +17,6 @@ class ProductApiImpl implements ProductApi {
   @override
   Future<List<ProductDto>> getListProducts() async {
     try {
-      // Call API
       final Map<String, dynamic> headers = {
         'accept': 'application/json',
       };
@@ -27,8 +26,14 @@ class ProductApiImpl implements ProductApi {
         options: Options(headers: headers),
       );
 
-      print("RESPONSE");
-      print(response);
+      if (response.statusCode != 200) {
+        throw Exception("Error occurred");
+      }
+      return List<ProductDto>.from(
+        response.data.map(
+          (product) => ProductDto.fromMap(product),
+        ),
+      );
     } on DioException catch (e) {
       catchError(e, []);
     }
@@ -37,9 +42,22 @@ class ProductApiImpl implements ProductApi {
   }
 
   @override
-  Future<ProductDto> getDetailProduct(String productID) async {
+  Future<ProductDto> createProduct(Product product) async {
     try {
-      // Call API
+      final Map<String, dynamic> headers = {
+        'accept': 'application/json',
+      };
+
+      final response = await _dio.post(
+        EndpointProduct.products,
+        options: Options(headers: headers),
+        data: ProductDto.fromProduct(product).toMap(),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception("Error occurred");
+      }
+      return ProductDto.fromMap(response.data);
     } on DioException catch (e) {
       catchError(e, const ProductDto());
     }

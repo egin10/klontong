@@ -26,22 +26,22 @@ class ProductDto extends Product {
 
   // Maps
   factory ProductDto.fromMap(Map<String, dynamic> json) => ProductDto(
-        id: json['id'],
+        id: json['_id'],
         categoryId: json['categoryId'],
         categoryName: json['categoryName'],
         sku: json['sku'],
         name: json['name'],
         description: json['description'],
-        weight: json['weight'],
-        width: json['width'],
-        length: json['length'],
-        height: json['height'],
+        weight: double.tryParse('${json['weight']}'),
+        width: double.tryParse('${json['width']}'),
+        length: double.tryParse('${json['length']}'),
+        height: double.tryParse('${json['height']}'),
         image: json['image'],
-        price: json['price'],
+        price: double.tryParse('${json['price']}'),
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
+        "_id": id,
         "categoryId": categoryId,
         "categoryName": categoryName,
         "sku": sku,
